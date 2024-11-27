@@ -65,6 +65,7 @@ See the [tests](/tests/test_py_d2) for more detailed usage examples.
 - [x] Markdown / block strings / code in shapes
 - [x] Icons in shapes
 - [x] Support for empty labels
+- [x] Grid-Diagrams
 - [ ] SQL table shapes
 - [ ] Class shapes
 - [ ] Comments

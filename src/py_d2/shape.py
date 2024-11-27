@@ -6,6 +6,7 @@ from typing import List
 from typing import Optional
 
 from py_d2.connection import D2Connection
+from py_d2.grid import Grid
 from py_d2.helpers import add_label_and_properties
 from py_d2.helpers import flatten
 from py_d2.helpers import indent
@@ -78,6 +79,8 @@ class D2Shape:
         connections: Optional[List[D2Connection]] = None,
         # A shape this is near
         near: Optional[str] = None,
+        # A grid-diagram configuration
+        grid: Optional[Grid] = None,
         **kwargs: D2Text,
     ):
         self.name = name
@@ -88,6 +91,7 @@ class D2Shape:
         self.icon = icon
         self.connections = connections or []
         self.near = near
+        self.grid = grid
         self.kwargs = kwargs
 
     def add_shape(self, shape: D2Shape):
@@ -100,6 +104,9 @@ class D2Shape:
         shapes = flatten([shape.lines() for shape in self.shapes])
         connections = flatten([connection.lines() for connection in self.connections])
         properties = shapes + connections
+
+        if self.grid:
+            properties.append("\n".join(self.grid.lines()))
 
         if self.shape:
             properties.append(f"shape: {self.shape.value}")
